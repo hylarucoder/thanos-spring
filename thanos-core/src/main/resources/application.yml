@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev # 默认开发环境
+  application:
+    name: "thanos"
+  output:
+    ansi:
+      enabled: always
+
+  redis:
+    host: localhost
+
+  cache:
+    type: redis
+    cache-names: 'thanos'
+    redis:
+      time-to-live: 5000
+      cache-null-values: false
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.jdbc.time_zone: UTC # change this
+    show-sql: true
+
+  security:
+    user:
+      name: admin
+      password: admin
+
+  devtools:
+    livereload:
+      enabled: true
+      port: 35729
+    restart:
+      enabled: true
+
+  datasource:
+    url: "jdbc:mysql://localhost:3306/thanos?useUnicode=yes&characterEncoding=utf8"
+    username: thanos
+    password: thanos
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+      connection-init-sql: "SET NAMES 'utf8mb4'"
+
+
+
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: ['*']
